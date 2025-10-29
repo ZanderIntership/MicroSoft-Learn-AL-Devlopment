@@ -23,6 +23,20 @@ page 50111 ExpressionsCard
                 }
             }
 
+            group(NameInputs){
+                
+                Caption = 'Name Inputs';
+                
+                field(Name1;Name1){
+                    ApplicationArea = All;
+                    Caption = 'Name 2';
+                }
+                field(Name2;Name2){
+                    ApplicationArea = All;
+                    Caption = 'Name 2';
+                }
+            }
+
             group(Output){
                 Caption = 'Execute';
                 field(Result;Result){
@@ -52,7 +66,34 @@ page 50111 ExpressionsCard
 
                 trigger OnAction()
                 begin
-                    Result := Value1 > Value2;
+                    
+                    
+                    CurrPage.Update();
+
+                    if Value1 > Value2 then
+                        Message('Value 1 is bigger then value 2')
+                    else if Value1 = Value2 then
+                        Message('The values match')
+                    else
+                        Message('Value 1 is not bigger then value 2');
+
+                  
+
+                end;
+            }
+
+            action (NameExecute){
+                ApplicationArea = All;
+                Caption = 'Execute Version 2';
+                Image = ExecuteBatch;
+
+                trigger OnAction()begin
+                    if Name1 = Name2 then
+                        Message('The name values match')
+                    else 
+                        Message('The name values do not match');
+
+
                 end;
             }
         }
@@ -62,5 +103,7 @@ page 50111 ExpressionsCard
         myInt: Integer;
         Value1 : Integer;
         Value2 : Integer;
+        Name1 : Text;
+        Name2 : Text;
         Result : Boolean;
 }
