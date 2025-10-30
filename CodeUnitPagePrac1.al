@@ -17,6 +17,11 @@ page 50116 CodeUnitPrac
                     ApplicationArea = All;
 
                 }
+                field(Wording;Wording){
+                    Caption = 'Text';
+                    ToolTip = 'Text Input';
+                    ApplicationArea = All;
+                }
             }
         }
     }
@@ -51,11 +56,24 @@ page 50116 CodeUnitPrac
                     CheckValue(Value1)
                 end;
             }
+
+            action(CodeBlock3){
+                
+                trigger OnAction()
+                var
+                    MyThirdCodeBlock :  Codeunit "Validations";
+                begin
+                    if MyThirdCodeBlock.CheckForPlusSign(Wording) then
+                        Message('The Symbole + is in the text');
+                end;
+
+            }
         }
     }
     
     var
         Value1: Integer;
+        Wording : Text;
 
     local procedure CheckValue(value : Integer)
     var
