@@ -43,7 +43,13 @@ codeunit 50120 "Validations"
     begin
         
     end;
-    
+
+   [EventSubscriber(ObjectType::Table, Database::Customer, 'OnAfterValidateEvent', 'Address', false, false)]
+    local procedure TableCustomerOnAfterValidateEventAddress(var Rec: Record Customer)
+    begin
+        CheckForPlusSign(Rec.Address);
+    end;
+
     procedure CheckForPlusSign ( TextToVerify : Text) : Boolean
     var
         i : Integer;
